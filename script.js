@@ -1,3 +1,10 @@
+/**
+ * Krishna - PERSONAL PORTFOLIO JAVASCRIPT ENGINE
+ * Handles: Preloader, Canvas Particles, Custom Cursor, Typing Effect,
+ * Scroll Progress, Theme Switcher, Skill Filters, Interactive Project Modals,
+ * Contact Form & Toast Notifications.
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // 1. Preloader Screen
@@ -387,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="text-sm text-muted mb-3"><i class="fa-solid fa-circle-info"></i> Interactive JavaScript AI Assistant Demo</p>
           <div class="chat-window glass-card" style="padding: 1rem; height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem; background: rgba(0,0,0,0.3);" id="chat-box">
             <div class="chat-msg bot-msg" style="align-self: flex-start; background: rgba(0, 242, 254, 0.15); border: 1px solid var(--accent-cyan); padding: 0.6rem 1rem; border-radius: 12px; max-width: 80%;">
-              <strong>AI Bot:</strong> Hello! I am Mangesh's AI Assistant. How can I help you today?
+              <strong>AI Bot:</strong> Hello! I am Krishna's AI Assistant. How can I help you today?
             </div>
           </div>
           <div class="chat-input-row" style="display: flex; gap: 0.5rem; margin-top: 1rem;">
@@ -416,14 +423,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // Generate AI Bot Reply
           setTimeout(() => {
-            let botReply = "I am a custom AI chatbot built with JavaScript and API integration. Mangesh Kumar specializes in AI, ML, Cloud & Web Dev!";
+            let botReply = "I am a custom AI chatbot built with JavaScript and API integration. Krishna Chaudhary specializes in AI, ML, Cloud & Web Dev!";
             const lower = text.toLowerCase();
             if (lower.includes('skill') || lower.includes('technology')) {
-              botReply = "Mangesh is skilled in Python, C, JavaScript, Web APIs, Azure Cloud, and Full Stack Web Development!";
+              botReply = "Krishna is skilled in Python, C, JavaScript, Web APIs, Azure Cloud, and Full Stack Web Development!";
             } else if (lower.includes('education') || lower.includes('college')) {
-              botReply = "Mangesh is pursuing B.Tech in AI & ML at GLA University with top academic scores!";
+              botReply = "Krishna is pursuing B.Tech in AI & ML at GLA University with top academic scores!";
             } else if (lower.includes('contact') || lower.includes('email')) {
-              botReply = "You can reach Mangesh at mangeshkumar1688@gmail.com or call +91 9520369689.";
+              botReply = "You can reach Krishna at krsna7308@gmail.com or call +91 9258127500.";
             }
 
             const botMsg = document.createElement('div');
@@ -461,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </thead>
               <tbody id="student-table-body">
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                  <td style="padding: 0.5rem;">Mangesh Kumar</td>
+                  <td style="padding: 0.5rem;">Krishna Chaudhary</td>
                   <td style="padding: 0.5rem;">B.Tech AIML</td>
                   <td style="padding: 0.5rem;"><span style="color:var(--accent-green)">Active</span></td>
                 </tr>
@@ -617,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 3000);
         }
 
-        showToast('Thank you! Your message has been sent to Mangesh Kumar.', 'success');
+        showToast('Thank you! Your message has been sent to Krishna Chaudhary.', 'success');
         contactForm.reset();
       }, 1200);
     });
@@ -666,7 +673,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Generate and download professional PDF CV for Mangesh Kumar
+ * Generate and download professional PDF CV 
  */
 function generateAndDownloadResumePDF(btnElement) {
   if (!btnElement) return;
@@ -715,7 +722,7 @@ function generateAndDownloadResumePDF(btnElement) {
         doc.setTextColor(255, 255, 255);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(20);
-        doc.text('MANGESH KUMAR', 15, 15);
+        doc.text('Krishna Chaudhary', 15, 15);
 
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9.5);
@@ -725,8 +732,8 @@ function generateAndDownloadResumePDF(btnElement) {
         // Contact Information Header Row
         doc.setFontSize(8.5);
         doc.setTextColor(...darkText);
-        doc.text('Email: mangeshkumar1688@gmail.com   |   Phone: +91 9520369689   |   Location: Mathura, India', 15, 34);
-        doc.text('GitHub: github.com/Mangeshkumar123   |   LinkedIn: linkedin.com/in/mangesh-kumar-93b878385', 15, 39);
+        doc.text('Email: krsnajaat@gmail.com   |   Phone: +91 9258127500   |   Location: Mathura, India', 15, 34);
+        doc.text('GitHub: https://github.com/KRSNAJAAT   |   LinkedIn: https://www.linkedin.com/in/krishna-chaudhary-1a188537b/', 15, 39);
 
         // Divider
         doc.setDrawColor(...lineBorder);
@@ -769,7 +776,7 @@ function generateAndDownloadResumePDF(btnElement) {
         doc.text('GLA University, Mathura', 15, y);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(...mutedText);
-        doc.text('Pursuing (2023 - Present)', 195, y, { align: 'right' });
+        doc.text('Pursuing (2026 - Present)', 195, y, { align: 'right' });
         y += 4.5;
 
         doc.setFont('helvetica', 'bold');
@@ -787,17 +794,17 @@ function generateAndDownloadResumePDF(btnElement) {
         y += 4.5;
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(...darkText);
-        doc.text('• Intermediate (Class XII): Score 86.8%', 18, y);
+        doc.text('• Intermediate (Class XII): Score 87.00%', 18, y);
         doc.setFont('helvetica', 'bold');
         doc.setTextColor(...mutedText);
-        doc.text('Grade: 86.8%', 195, y, { align: 'right' });
+        doc.text('Grade: 87.0%', 195, y, { align: 'right' });
         y += 4.5;
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(...darkText);
-        doc.text('• High School (Class X): Score 90.16%', 18, y);
+        doc.text('• High School (Class X): Score 84.6%', 18, y);
         doc.setFont('helvetica', 'bold');
         doc.setTextColor(...mutedText);
-        doc.text('Grade: 90.16%', 195, y, { align: 'right' });
+        doc.text('Grade: 84.6%', 195, y, { align: 'right' });
         y += 8;
 
         // 3. Technical Skills
@@ -858,7 +865,7 @@ function generateAndDownloadResumePDF(btnElement) {
         addSectionHeader('ACHIEVEMENTS & CERTIFICATIONS');
 
         const certsList = [
-          'Scored 90.16% in High School and 86.8% in Intermediate examinations.',
+          'Scored 84.6% in High School and 87.00% in Intermediate examinations.',
           'Active tech participant in GLA University Tech Fests and Coding Hackathons.',
           'Completed certifications in Machine Learning and Full Stack Web Development.'
         ];
@@ -875,10 +882,10 @@ function generateAndDownloadResumePDF(btnElement) {
         doc.setFont('helvetica', 'italic');
         doc.setFontSize(7.5);
         doc.setTextColor(...mutedText);
-        doc.text('Official Resume of Mangesh Kumar • Generated via Portfolio', 105, 287, { align: 'center' });
+        doc.text('Official Resume of Krishna Chaudhary • Generated via Portfolio', 105, 287, { align: 'center' });
 
         // Save PDF
-        doc.save('Mangesh_Kumar_Resume.pdf');
+        doc.save('Krishna_Chaudhary_Resume.pdf');
       } else {
         downloadFallbackResumeText();
       }
@@ -890,7 +897,7 @@ function generateAndDownloadResumePDF(btnElement) {
       if (iconEl) iconEl.className = 'fa-solid fa-circle-check btn-icon-cv neon-green';
       if (textEl) textEl.textContent = 'Downloaded!';
 
-      showToast('📄 Mangesh Kumar\'s Resume (PDF) downloaded successfully!', 'success');
+      showToast('📄 Krishna\'s Resume (PDF) downloaded successfully!', 'success');
 
       setTimeout(() => {
         btnElement.classList.remove('btn-cv-success');
@@ -913,12 +920,12 @@ function generateAndDownloadResumePDF(btnElement) {
  * Fallback Text Download if PDF library fails
  */
 function downloadFallbackResumeText() {
-  const textContent = `MANGESH KUMAR
+  const textContent = `Krishna Chaudhary
 AI & Web Engineering Student | Future Software Engineer
-Email: mangeshkumar1688@gmail.com | Phone: +91 9520369689
+Email: krsnajaat7308@gmail.com | Phone: +91 9258127500
 Location: GLA University, Mathura, Uttar Pradesh, India
-GitHub: https://github.com/Mangeshkumar123
-LinkedIn: https://www.linkedin.com/in/mangesh-kumar-93b878385
+GitHub: https://github.com/KRSNAJAAT
+LinkedIn: https://www.linkedin.com/in/krishna-chaudhary-1a188537b/
 
 ================================================================
 PROFESSIONAL SUMMARY
@@ -931,8 +938,8 @@ and Full Stack Web Development.
 EDUCATION
 ================================================================
 • B.Tech in Artificial Intelligence & Web Engineering - GLA University, Mathura
-• Intermediate (12th Class) - Score: 86.8%
-• High School (10th Class) - Score: 90.16%
+• Intermediate (12th Class) - Score: 87.0%
+• High School (10th Class) - Score: 84.6%
 
 ================================================================
 TECHNICAL SKILLS
@@ -946,12 +953,12 @@ TECHNICAL SKILLS
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'Mangesh_Kumar_Resume.txt';
+  a.download = 'Krishna_Chaudhary_Resume.txt';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showToast('📄 Mangesh Kumar\'s Resume downloaded!', 'success');
+  showToast('📄 Krishna\'s Resume downloaded!', 'success');
 }
 
 // Helper Toast Notification System
