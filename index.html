@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal Portfolio of Krishna Chaudhary - AI & Machine Learning Student, Future Software Engineer" />
+  <meta name="theme-color" content="#070a12" />
+  <title>Krishna Chaudhary | AI & ML Student & Future Software Engineer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-content glass-card">
+      <div class="loader-ring">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="loader-logo">KR$NA<span class="neon-cyan">.AI</span></div>
+      <p class="loader-text">INITIALIZING INTERFACE...</p>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="loader-bar"></div>
+      </div>
+      <span class="loader-percent" id="loader-percent">0%</span>
+    </div>
+  </div>
+
+  <!-- Background Particle Canvas & Ambient Blur Orbs -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="ambient-glow orb-1"></div>
+  <div class="ambient-glow orb-2"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="header sticky-header" id="header">
+    <div class="container nav-container">
+      <a href="#home" class="logo" id="nav-logo">
+        <span class="logo-text">KR$NA<span class="neon-cyan">.AI</span></span>
+        <span class="logo-dot"></span>
+      </a>
+
+      <nav class="nav-desktop">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> About</a></li>
+          <li><a href="#education" class="nav-link"><i class="fa-solid fa-graduation-cap"></i> Education</a></li>
+          <li><a href="#certification" class="nav-link"><i class="fa-solid fa-certificate"></i> Certification</a></li>
+          <li><a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i> Skills</a></li>
+          <li><a href="#projects" class="nav-link"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+          <li><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="btn-icon glass-btn" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobile-toggle" class="btn-icon glass-btn mobile-only" aria-label="Toggle Mobile Menu">
+          <i class="fa-solid fa-bars" id="menu-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-drawer" class="mobile-drawer glass-card">
+      <ul class="mobile-nav-list">
+        <li><a href="#home" class="mobile-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="#about" class="mobile-link"><i class="fa-solid fa-user"></i> About</a></li>
+        <li><a href="#education" class="mobile-link"><i class="fa-solid fa-graduation-cap"></i> Education</a></li>
+        <li><a href="#certification" class="mobile-link"><i class="fa-solid fa-certificate"></i> Certification</a></li>
+        <li><a href="#skills" class="mobile-link"><i class="fa-solid fa-code"></i> Skills</a></li>
+        <li><a href="#projects" class="mobile-link"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+        <li><a href="#contact" class="mobile-link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section id="home" class="hero-section section">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="status-badge glass-card">
+            <span class="pulse-dot"></span>
+            <span>Open for Opportunities & AI Internships</span>
+          </div>
+
+          <h1 class="hero-name">
+            Hello, I'm <br />
+            <span class="gradient-text">Krishna Chaudhary</span>
+          </h1>
+
+          <h2 class="hero-subtitle">
+            I am a <span id="typing-text"></span><span class="typing-cursor">|</span>
+          </h2>
+
+          <p class="hero-description">
+            Passionate about Artificial Intelligence, Machine Learning, Cloud Computing, and Full Stack Development. I enjoy building modern, responsive, and user-friendly applications.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary btn-glow">
+              <i class="fa-solid fa-paper-plane"></i> Contact Me
+            </a>
+            <button id="hero-download-cv" class="btn btn-glass btn-resume" aria-label="Download Resume PDF">
+              <i class="fa-solid fa-file-arrow-down btn-icon-cv"></i> <span class="btn-text-cv">Download Resume</span>
+            </button>
+            <a href="#projects" class="btn btn-glass">
+              <i class="fa-solid fa-code"></i> View Projects
+            </a>
+          </div>
+
+          <div class="hero-stats glass-card">
+            <div class="stat-item">
+              <span class="stat-number neon-cyan">GLA</span>
+              <span class="stat-label">B.Tech AIML</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number neon-purple">84.6%</span>
+              <span class="stat-label">High School</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number neon-blue">87.00%</span>
+              <span class="stat-label">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="profile-frame-wrapper">
+            <div class="glowing-orbit-ring"></div>
+            <div class="profile-card glass-card">
+              <div class="profile-img-container">
+                <img src="assets/images/profile_avatar.jpg" alt="Krishna Chaudhary" class="profile-img" />
+                <div class="profile-overlay"></div>
+              </div>
+              <div class="profile-info-badge">
+                <span class="badge-role"><i class="fa-solid fa-microchip"></i> AI & ML Scholar</span>
+                <span class="badge-location"><i class="fa-solid fa-location-dot"></i> GLA University, India</span>
+              </div>
+            </div>
+
+            <!-- Floating Tech Badges -->
+            <div class="floating-tech-badge badge-1 glass-card">
+              <i class="fa-solid fa-brain neon-purple"></i>
+              <span>AI / ML</span>
+            </div>
+            <div class="floating-tech-badge badge-2 glass-card">
+              <i class="fa-solid fa-cloud neon-cyan"></i>
+              <span>Azure</span>
+            </div>
+            <div class="floating-tech-badge badge-3 glass-card">
+              <i class="fa-brands fa-js neon-blue"></i>
+              <span>JavaScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. About Me Section -->
+    <section id="about" class="about-section section">
+      <div class="container">
+        <div class="section-title-wrapper reveal">
+          <span class="section-tag"><i class="fa-solid fa-id-card"></i> BIOGRAPHY</span>
+          <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+          <p class="section-subtitle">Pioneering Intelligent Systems & Modern Software Solutions</p>
+        </div>
+
+        <div class="about-content-wrapper">
+          <div class="main-about-card glass-card reveal">
+            <div class="about-header">
+              <div class="about-avatar-mini">
+                <i class="fa-solid fa-user-astronaut neon-cyan"></i>
+              </div>
+              <div>
+                <h3 class="about-heading">Krishna Chaudhary</h3>
+                <p class="about-subheading">B.Tech Student in Artificial Intelligence & Machine Learning</p>
+              </div>
+            </div>
+
+            <p class="about-text">
+              I am Krishna Chaudhary, currently pursuing B.Tech in Artificial Intelligence and Machine Learning at GLA University. I enjoy learning new technologies and building innovative projects. My interests include AI, Cloud Computing, Web Development, and Problem Solving.
+            </p>
+
+            <div class="about-pillars-grid">
+              <div class="pillar-card glass-card">
+                <div class="pillar-icon neon-purple"><i class="fa-solid fa-brain"></i></div>
+                <h4>Artificial Intelligence</h4>
+                <p>Developing smart models & machine learning workflows.</p>
+              </div>
+              <div class="pillar-card glass-card">
+                <div class="pillar-icon neon-cyan"><i class="fa-solid fa-cloud"></i></div>
+                <h4>Cloud Computing</h4>
+                <p>Architecting scalable solutions with Microsoft Azure.</p>
+              </div>
+              <div class="pillar-card glass-card">
+                <div class="pillar-icon neon-blue"><i class="fa-solid fa-code"></i></div>
+                <h4>Web Development</h4>
+                <p>Creating intuitive, high-performance web applications.</p>
+              </div>
+              <div class="pillar-card glass-card">
+                <div class="pillar-icon neon-green"><i class="fa-solid fa-cubes"></i></div>
+                <h4>Problem Solving</h4>
+                <p>Focusing on Core Problem Solving, Algorithms & Clean Code.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Education Section -->
+    <section id="education" class="education-section section">
+      <div class="container">
+        <div class="section-title-wrapper reveal">
+          <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> ACADEMICS</span>
+          <h2 class="section-title">Education <span class="gradient-text">History</span></h2>
+          <p class="section-subtitle">Academic Milestones & Educational Background</p>
+        </div>
+
+        <div class="education-cards-grid">
+          <!-- Graduation -->
+          <div class="education-card glass-card reveal">
+            <div class="edu-card-glow"></div>
+            <div class="edu-badge status-pursuing">
+              <i class="fa-solid fa-spinner fa-spin"></i> Pursuing
+            </div>
+            <div class="edu-icon-box">
+              <i class="fa-solid fa-building-columns neon-cyan"></i>
+            </div>
+            <span class="edu-level">Graduation</span>
+            <h3 class="edu-institution">GLA University</h3>
+            <p class="edu-course">B.Tech Artificial Intelligence & Machine Learning</p>
+            <div class="edu-details">
+              <span class="edu-detail-tag"><i class="fa-solid fa-microchip"></i> Core Specialization: AI & ML</span>
+              <span class="edu-detail-tag"><i class="fa-solid fa-laptop-code"></i> Software Engineering</span>
+            </div>
+          </div>
+
+          <!-- Intermediate -->
+          <div class="education-card glass-card reveal">
+            <div class="edu-card-glow"></div>
+            <div class="edu-badge status-completed">
+              <i class="fa-solid fa-check-double"></i> 2025
+            </div>
+            <div class="edu-icon-box">
+              <i class="fa-solid fa-school neon-purple"></i>
+            </div>
+            <span class="edu-level">Intermediate</span>
+            <h3 class="edu-institution">CBSE BOARD</h3>
+            <div class="edu-score-box">
+              <span class="score-number neon-purple">87.0%</span>
+              <span class="score-label">Percentage</span>
+            </div>
+            <p class="edu-course">Science & Mathematics Stream</p>
+          </div>
+
+          <!-- High School -->
+          <div class="education-card glass-card reveal">
+            <div class="edu-card-glow"></div>
+            <div class="edu-badge status-completed">
+              <i class="fa-solid fa-award"></i> 2023
+            </div>
+            <div class="edu-icon-box">
+              <i class="fa-solid fa-medal neon-blue"></i>
+            </div>
+            <span class="edu-level">High School</span>
+            <h3 class="edu-institution">CBSE BOARD</h3>
+            <div class="edu-score-box">
+              <span class="score-number neon-blue">84.6%</span>
+              <span class="score-label">Percentage</span>
+            </div>
+            <p class="edu-course">High Academic Distinction</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Certification Section -->
+    <section id="certification" class="certification-section section">
+      <div class="container">
+        <div class="section-title-wrapper reveal">
+          <span class="section-tag"><i class="fa-solid fa-award"></i> CREDENTIALS</span>
+          <h2 class="section-title">Certifications & <span class="gradient-text">Badges</span></h2>
+          <p class="section-subtitle">Verified Technical Certifications & Credentials</p>
+        </div>
+
+        <div class="certification-wrapper reveal">
+          <div class="cert-glass-card glass-card">
+            <div class="cert-glow-effect"></div>
+            <div class="cert-grid">
+              <div class="cert-icon-container">
+                <div class="azure-logo-badge">
+                  <!-- Custom Azure SVG/Icon -->
+                  <svg viewBox="0 0 96 96" class="azure-svg">
+                    <path fill="#0078D4" d="M32.8 12 11.5 73.1h20.8z"/>
+                    <path fill="#50E6FF" d="M37.3 12 61.2 73.1H84.5L52.8 12z"/>
+                    <path fill="#0078D4" d="M37.3 12h23.3L84.5 73.1H61.2z"/>
+                  </svg>
+                </div>
+                <span class="cert-issuer"><i class="fa-brands fa-microsoft"></i> Microsoft Verified</span>
+              </div>
+
+              <div class="cert-details">
+                <div class="cert-header">
+                  <span class="cert-type-badge">Cloud Certification</span>
+                  <h3 class="cert-title">Microsoft Azure Fundamentals</h3>
+                  <span class="cert-code">AZ-900</span>
+                </div>
+
+                <p class="cert-description">
+                  Demonstrates foundational knowledge of cloud concepts, Microsoft Azure core services, security, privacy, compliance, trust, and Azure pricing & support structures.
+                </p>
+
+                <div class="cert-skills-tags">
+                  <span class="cert-tag"><i class="fa-solid fa-cloud"></i> Cloud Concepts</span>
+                  <span class="cert-tag"><i class="fa-solid fa-server"></i> Azure Architecture</span>
+                  <span class="cert-tag"><i class="fa-solid fa-shield-halved"></i> Security & Governance</span>
+                  <span class="cert-tag"><i class="fa-solid fa-coins"></i> Cost Management</span>
+                </div>
+
+                <div class="cert-footer">
+                  <button class="btn btn-primary btn-glow" id="btn-view-cert">
+                    <i class="fa-solid fa-circle-check"></i> View Credential Info
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Skills Section -->
+    <section id="skills" class="skills-section section">
+      <div class="container">
+        <div class="section-title-wrapper reveal">
+          <span class="section-tag"><i class="fa-solid fa-laptop-code"></i> TECHNICAL STACK</span>
+          <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+          <p class="section-subtitle">Programming Languages, Web Technologies, Cloud & Concepts</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="skill-filters reveal">
+          <button class="filter-btn active" data-filter="all">All Skills</button>
+          <button class="filter-btn" data-filter="languages">Languages</button>
+          <button class="filter-btn" data-filter="web">Web Tech</button>
+          <button class="filter-btn" data-filter="tools">Tools</button>
+          <button class="filter-btn" data-filter="cloud">Cloud</button>
+          <button class="filter-btn" data-filter="concepts">Concepts</button>
+        </div>
+
+        <div class="skills-grid" id="skills-grid">
+          <!-- Languages -->
+          <div class="skill-card glass-card reveal" data-category="languages">
+            <div class="skill-icon-box"><i class="fa-solid fa-c neon-cyan"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">C</h4>
+              <span class="skill-category">Programming Language</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+            <span class="skill-percent">85%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="languages">
+            <div class="skill-icon-box"><i class="fa-brands fa-python neon-yellow"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">Python</h4>
+              <span class="skill-category">AI, ML & Scripting</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+            <span class="skill-percent">82%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="languages">
+            <div class="skill-icon-box"><i class="fa-brands fa-js neon-yellow"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">JavaScript</h4>
+              <span class="skill-category">Web & Scripting</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+            <span class="skill-percent">90%</span>
+          </div>
+
+          <!-- Web Technologies -->
+          <div class="skill-card glass-card reveal" data-category="web">
+            <div class="skill-icon-box"><i class="fa-brands fa-html5 neon-orange"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">HTML</h4>
+              <span class="skill-category">Semantic Layouts</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+            <span class="skill-percent">95%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="web">
+            <div class="skill-icon-box"><i class="fa-brands fa-css3-alt neon-blue"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">CSS</h4>
+              <span class="skill-category">Styling & Animations</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 92%;"></div></div>
+            <span class="skill-percent">92%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="web">
+            <div class="skill-icon-box"><i class="fa-solid fa-wand-magic-sparkles neon-cyan"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">JavaScript Web APIs</h4>
+              <span class="skill-category">DOM & Async Fetch</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+            <span class="skill-percent">88%</span>
+          </div>
+
+          <!-- Tools -->
+          <div class="skill-card glass-card reveal" data-category="tools">
+            <div class="skill-icon-box"><i class="fa-brands fa-git-alt neon-orange"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">Git</h4>
+              <span class="skill-category">Version Control</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 86%;"></div></div>
+            <span class="skill-percent">86%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="tools">
+            <div class="skill-icon-box"><i class="fa-brands fa-github neon-white"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">GitHub</h4>
+              <span class="skill-category">Repository Management</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+            <span class="skill-percent">88%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="tools">
+            <div class="skill-icon-box"><i class="fa-solid fa-code neon-blue"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">VS Code</h4>
+              <span class="skill-category">Development Environment</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 94%;"></div></div>
+            <span class="skill-percent">94%</span>
+          </div>
+
+          <!-- Cloud -->
+          <div class="skill-card glass-card reveal" data-category="cloud">
+            <div class="skill-icon-box"><i class="fa-solid fa-cloud neon-cyan"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">Microsoft Azure</h4>
+              <span class="skill-category">Cloud Services & AZ-900</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+            <span class="skill-percent">82%</span>
+          </div>
+
+          <!-- Concepts -->
+          <div class="skill-card glass-card reveal" data-category="concepts">
+            <div class="skill-icon-box"><i class="fa-solid fa-brain neon-purple"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">Artificial Intelligence</h4>
+              <span class="skill-category">AI Concepts & Prompts</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 84%;"></div></div>
+            <span class="skill-percent">84%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="concepts">
+            <div class="skill-icon-box"><i class="fa-solid fa-layer-group neon-cyan"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">Software Architecture</h4>
+              <span class="skill-category">Clean Code & Design</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+            <span class="skill-percent">85%</span>
+          </div>
+
+          <div class="skill-card glass-card reveal" data-category="concepts">
+            <div class="skill-icon-box"><i class="fa-solid fa-lightbulb neon-yellow"></i></div>
+            <div class="skill-info">
+              <h4 class="skill-name">Problem Solving</h4>
+              <span class="skill-category">Algorithmic Logic</span>
+            </div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+            <span class="skill-percent">88%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Projects Section -->
+    <section id="projects" class="projects-section section">
+      <div class="container">
+        <div class="section-title-wrapper reveal">
+          <span class="section-tag"><i class="fa-solid fa-laptop-code"></i> PORTFOLIO</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+          <p class="section-subtitle">Showcasing Practical Software Solutions & Applications</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: AI Chatbot -->
+          <div class="project-card glass-card reveal">
+            <div class="project-card-glow"></div>
+            <div class="project-header">
+              <div class="project-icon-box">
+                <i class="fa-solid fa-robot neon-purple"></i>
+              </div>
+              <span class="project-badge"><i class="fa-solid fa-sparkles"></i> AI Powered</span>
+            </div>
+
+            <h3 class="project-title">AI Chatbot</h3>
+            <p class="project-description">
+              An intelligent chatbot using JavaScript and APIs. Delivers dynamic conversation responses, intelligent prompt processing, and a sleek futuristic glass UI.
+            </p>
+
+            <div class="project-tech-tags">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Web APIs</span>
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">Glass CSS</span>
+            </div>
+
+            <div class="project-actions">
+              <button class="btn btn-primary btn-glow btn-demo" data-project="chatbot">
+                <i class="fa-solid fa-play"></i> Live Demo
+              </button>
+              <a href="https://github.com/Mangeshkumar123" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2: Student Management System -->
+          <div class="project-card glass-card reveal">
+            <div class="project-card-glow"></div>
+            <div class="project-header">
+              <div class="project-icon-box">
+                <i class="fa-solid fa-user-graduate neon-cyan"></i>
+              </div>
+              <span class="project-badge"><i class="fa-solid fa-database"></i> Web App</span>
+            </div>
+
+            <h3 class="project-title">Student Management System</h3>
+            <p class="project-description">
+              A responsive web application for managing student records. Supports student entry, record editing, search filtering, and LocalStorage data persistence.
+            </p>
+
+            <div class="project-tech-tags">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">LocalStorage</span>
+            </div>
+
+            <div class="project-actions">
+              <button class="btn btn-primary btn-glow btn-demo" data-project="student">
+                <i class="fa-solid fa-play"></i> Live Demo
+              </button>
+              <a href="https://github.com/Mangeshkumar123" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 3: Weather App -->
+          <div class="project-card glass-card reveal">
+            <div class="project-card-glow"></div>
+            <div class="project-header">
+              <div class="project-icon-box">
+                <i class="fa-solid fa-cloud-sun-rain neon-blue"></i>
+              </div>
+              <span class="project-badge"><i class="fa-solid fa-cloud"></i> REST API</span>
+            </div>
+
+            <h3 class="project-title">Weather App</h3>
+            <p class="project-description">
+              A weather application using OpenWeather API. Features city weather search, real-time temperature tracking, atmospheric conditions, and dynamic weather visuals.
+            </p>
+
+            <div class="project-tech-tags">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">OpenWeather API</span>
+              <span class="tech-tag">Async / Fetch</span>
+              <span class="tech-tag">Glass UI</span>
+            </div>
+
+            <div class="project-actions">
+              <button class="btn btn-primary btn-glow btn-demo" data-project="weather">
+                <i class="fa-solid fa-play"></i> Live Demo
+              </button>
+              <a href="https://github.com/Mangeshkumar123" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contact Section -->
+    <section id="contact" class="contact-section section">
+      <div class="container">
+        <div class="section-title-wrapper reveal">
+          <span class="section-tag"><i class="fa-solid fa-paper-plane"></i> CONNECT</span>
+          <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+          <p class="section-subtitle">Let's Discuss AI Projects, Software Ideas & Collaborations</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Left Column: Info Cards -->
+          <div class="contact-info-column reveal">
+            <div class="contact-card glass-card">
+              <div class="contact-card-icon neon-purple"><i class="fa-solid fa-user"></i></div>
+              <div class="contact-card-details">
+                <span class="contact-card-label">Full Name</span>
+                <p class="contact-card-value">Krishna Chaudhary</p>
+              </div>
+            </div>
+
+            <div class="contact-card glass-card">
+              <div class="contact-card-icon neon-cyan"><i class="fa-solid fa-building-columns"></i></div>
+              <div class="contact-card-details">
+                <span class="contact-card-label">College Email</span>
+                <p class="contact-card-value text-sm">krishna.chaudhary_cs.aiml25@gla.ac.in</p>
+              </div>
+              <button class="btn-copy glass-btn" data-copy="krishna.chaudhary_cs.aiml25@gla.ac.in" title="Copy College Email">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+
+            <div class="contact-card glass-card">
+              <div class="contact-card-icon neon-blue"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-card-details">
+                <span class="contact-card-label">Personal Email</span>
+                <a href="mailto:krsnajaat7308@gmail.com" class="contact-card-value text-sm">krsnajaat7308@gmail.com</a>
+              </div>
+              <button class="btn-copy glass-btn" data-copy="krsnajaat7308@gmail.com" title="Copy Personal Email">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+
+            <div class="contact-card glass-card">
+              <div class="contact-card-icon neon-green"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-card-details">
+                <span class="contact-card-label">Phone</span>
+                <a href="tel:+919258127500" class="contact-card-value">+91 9258127500</a>
+              </div>
+              <button class="btn-copy glass-btn" data-copy="+919258127500" title="Copy Phone Number">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+
+            <div class="social-links-card glass-card">
+              <h4>Connect On Social Platforms</h4>
+              <div class="social-btns-row">
+                <a href="https://www.linkedin.com/in/krishna-chaudhary-1a188537b/" target="_blank" rel="noopener noreferrer" class="social-btn glass-btn neon-blue" title="LinkedIn Profile">
+                  <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                </a>
+                <a href="https://github.com/KRSNAJAAT" target="_blank" rel="noopener noreferrer" class="social-btn glass-btn neon-purple" title="GitHub Profile">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Glass Contact Form -->
+          <div class="contact-form-column reveal">
+            <div class="contact-form-card glass-card">
+              <h3 class="form-title">Send Me a Message</h3>
+              <p class="form-subtitle">Fill out the form below and I'll get back to you promptly.</p>
+
+              <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                  <label for="form-name"><i class="fa-solid fa-user"></i> Your Name</label>
+                  <input type="text" id="form-name" class="glass-input" placeholder="e.g. Alex Smith" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="form-email"><i class="fa-solid fa-envelope"></i> Your Email</label>
+                  <input type="email" id="form-email" class="glass-input" placeholder="e.g. alex@example.com" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="form-subject"><i class="fa-solid fa-heading"></i> Subject</label>
+                  <input type="text" id="form-subject" class="glass-input" placeholder="Project Inquiry / Collaboration" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="form-message"><i class="fa-solid fa-message"></i> Message</label>
+                  <textarea id="form-message" class="glass-input" rows="4" placeholder="Hello KR$NA, I'd like to talk about..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-glow btn-full" id="btn-submit-form">
+                  <i class="fa-solid fa-paper-plane"></i> Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 8. Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-text">Krishna <span class="neon-cyan">Chaudhary</span></span>
+        </a>
+        <p class="footer-tagline">AI & Machine Learning Student | Future Software Engineer</p>
+      </div>
+
+      <p class="footer-made">
+        Built with <i class="fa-solid fa-heart neon-pink"></i> using HTML, CSS & JavaScript
+      </p>
+
+      <div class="footer-resume-cta">
+        <button id="footer-download-cv" class="btn btn-glass btn-resume-sm" aria-label="Download Resume PDF">
+          <i class="fa-solid fa-file-arrow-down btn-icon-cv"></i> <span class="btn-text-cv">Download Resume (PDF)</span>
+        </button>
+      </div>
+
+      <div class="footer-socials">
+        <a href="https://github.com/KRSNAJAAT" target="_blank" rel="noopener noreferrer" class="glass-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/krishna-chaudhary-1a188537b/" target="_blank" rel="noopener noreferrer" class="glass-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:krsnajaat7308@gmail.com" class="glass-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="tel:+919258127500" class="glass-btn" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
+      </div>
+
+      <div class="footer-copy">
+        &copy; 2026 Krishna Chaudhary. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top" class="back-to-top glass-btn" aria-label="Back to top">
+    <svg class="progress-ring" width="48" height="48">
+      <circle class="progress-ring-circle" stroke="var(--accent-cyan)" stroke-width="3" fill="transparent" r="20" cx="24" cy="24" />
+    </svg>
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Project Live Demo Modal Window -->
+  <div id="project-modal" class="modal-backdrop">
+    <div class="modal-container glass-card">
+      <div class="modal-header">
+        <h3 id="modal-title" class="modal-title"><i class="fa-solid fa-laptop-code"></i> Project Demo</h3>
+        <button id="modal-close" class="btn-icon glass-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Dynamic Interactive Content Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Libraries & Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script1 (1).js" defer></script>
+</body>
+</html> 
