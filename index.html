@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voyx Admin | BOM</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#f4f5f7;
+    --navy:#0e1a2b;
+    --navy-soft:#101f33;
+    --orange:#ff6a2b;
+    --orange-soft:#ffe6da;
+    --card-bg:#ffffff;
+    --border:#e7e9ee;
+    --text-dark:#0e1a2b;
+    --text-mid:#5c6474;
+    --text-light:#9399a8;
+    --green:#1aa15c;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text-dark);
+    padding:28px 32px 60px;
+  }
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:2px;
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:0.5px;
+  }
+  .logo span.v{color:var(--orange);}
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .date-input{
+    border:1px solid var(--border);
+    background:#fff;
+    border-radius:999px;
+    padding:9px 16px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-dark);
+    cursor:pointer;
+  }
+  .btn{
+    border:none;
+    border-radius:999px;
+    padding:10px 18px;
+    font-size:13px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--orange);color:#fff;}
+  .btn-dark{background:var(--navy);color:#fff;}
+  .btn-outline{background:#fff;color:var(--text-dark);border:1px solid var(--border);}
+  .user-block{
+    text-align:right;
+    font-size:13px;
+  }
+  .user-block .name{font-weight:700;}
+  .user-block a{color:#3d6bff;text-decoration:none;font-size:12px;}
+
+  .stats-row{
+    display:grid;
+    grid-template-columns:1.1fr 1fr 1fr 1fr;
+    gap:16px;
+    margin-bottom:20px;
+  }
+  .stat-card{
+    border-radius:var(--radius);
+    padding:20px 22px;
+    background:var(--card-bg);
+    border:1px solid var(--border);
+  }
+  .stat-card.dark{
+    background:linear-gradient(160deg,var(--navy) 0%, var(--navy-soft) 100%);
+    color:#fff;
+    border:none;
+  }
+  .stat-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.6px;
+    color:var(--text-light);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:14px;
+  }
+  .stat-card.dark .stat-label{color:#a9b2c3;}
+  .stat-main{
+    font-size:34px;
+    font-weight:800;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .stat-card.dark .stat-main{color:var(--orange);}
+  .stat-main small{font-size:15px;font-weight:600;color:var(--text-mid);}
+  .stat-card.dark .stat-main small{color:#c7cde0;}
+  .stat-rev{
+    margin-top:6px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--text-mid);
+  }
+  .stat-card.dark .stat-rev{color:#e8eaf0;}
+  .stat-rev .amt{font-weight:800;color:var(--text-dark);}
+  .stat-card.dark .stat-rev .amt{color:#fff;}
+
+  .main-grid{
+    display:grid;
+    grid-template-columns:2.4fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .panel{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 20px 8px;
+  }
+  .panel-title{
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.6px;
+    color:var(--text-mid);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  thead th{
+    text-align:left;
+    font-size:11px;
+    letter-spacing:0.4px;
+    color:var(--text-light);
+    font-weight:700;
+    padding:6px 8px;
+    border-bottom:1px solid var(--border);
+  }
+  tbody td{
+    padding:10px 8px;
+    border-bottom:1px solid #f1f2f5;
+    vertical-align:middle;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  .rep-name{font-weight:700;}
+  .day-val{font-weight:700;color:var(--green);}
+  .day-rev{font-size:11px;color:var(--text-light);display:block;}
+  .mtd-val{font-weight:700;color:var(--orange);}
+  .target-wrap{display:flex;align-items:center;gap:8px;min-width:120px;}
+  .target-pct{font-weight:700;font-size:12px;width:38px;}
+  .target-track{
+    flex:1;height:5px;border-radius:4px;background:#eef0f3;overflow:hidden;
+  }
+  .target-fill{height:100%;background:var(--orange);border-radius:4px;}
+  .target-goal{font-size:11px;color:var(--text-light);width:28px;}
+
+  .dest-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    font-size:13px;
+    font-weight:600;
+  }
+  .dest-item:last-child{border-bottom:none;}
+  .dest-count{
+    background:rgba(255,255,255,0.08);
+    border-radius:8px;
+    padding:4px 10px;
+    font-size:12px;
+    font-weight:700;
+  }
+  .panel.dark{
+    background:linear-gradient(160deg,var(--navy) 0%, var(--navy-soft) 100%);
+    border:none;
+    color:#fff;
+  }
+  .panel.dark .panel-title{color:#a9b2c3;}
+  .placeholder-note{
+    font-size:12px;
+    color:#8f97ab;
+    padding:20px 0;
+    line-height:1.5;
+  }
+  .dest-flag{
+    width:18px;height:13px;object-fit:cover;border-radius:2px;margin-right:8px;vertical-align:middle;
+  }
+  .dest-name{display:flex;align-items:center;}
+
+  .charts-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .chart-wrap{height:220px;}
+
+  .status-line{
+    font-size:12px;
+    color:var(--text-light);
+    margin:-14px 0 18px 2px;
+  }
+  .status-line.error{color:#d64545;font-weight:600;}
+  .loading-overlay{
+    opacity:0.45;
+    pointer-events:none;
+    transition:opacity .15s ease;
+  }
+
+  @media (max-width:1000px){
+    .stats-row{grid-template-columns:1fr 1fr;}
+    .main-grid{grid-template-columns:1fr;}
+    .charts-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo"><span class="v">V</span>OYX</div>
+  <div class="controls">
+    <input id="reportDate" class="date-input" type="date">
+    <button class="btn btn-primary" type="button">&#9635; Dashboard</button>
+    <button class="btn btn-outline" type="button">&#128203; Wallet Summary</button>
+    <button class="btn btn-dark" id="downloadCsv" type="button">&#8595; Download CSV</button>
+  </div>
+  <div class="user-block">
+    <div class="name">Voyx Admin</div>
+    <a href="#">Logout &rarr;</a>
+  </div>
+</div>
+
+<div id="statusLine" class="status-line">Loading dashboard&hellip;</div>
+
+<div id="appBody">
+  <div class="stats-row">
+    <div class="stat-card dark">
+      <div class="stat-label">&#128202; TODAY PERFORMANCE</div>
+      <div class="stat-main" id="todaySales">&mdash; <small>Orders</small></div>
+      <div class="stat-rev">&#8377;<span class="amt" id="todayRevenue">&mdash;</span> Revenue</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">&#128202; <span id="mtdLabel">MTD</span></div>
+      <div class="stat-main" id="mtdSales">&mdash;</div>
+      <div class="stat-rev">&#8377;<span class="amt" id="mtdRevenue">&mdash;</span> Revenue</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">&#128340; PREV MONTH (SAME DAY)</div>
+      <div class="stat-main" id="pmsdSales">&mdash;</div>
+      <div class="stat-rev">&#8377;<span class="amt" id="pmsdRevenue">&mdash;</span> Revenue</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">&#128197; PREV MONTH</div>
+      <div class="stat-main" id="pmSales">&mdash;</div>
+      <div class="stat-rev">&#8377;<span class="amt" id="pmRevenue">&mdash;</span> Revenue</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div class="panel">
+      <div class="panel-title">&#128202; DAILY LEADERBOARD</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>SALES_R</th><th>#DAY</th><th>#MTD</th><th>MTD REV</th><th>ARPU</th><th>TARGET</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <tr><td colspan="7" style="text-align:center;color:#9399a8;padding:24px;">Loading&hellip;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel dark">
+      <div class="panel-title">&#128204; TOP DESTINATIONS</div>
+      <div id="destinationsList">
+        <div class="placeholder-note">Loading&hellip;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="panel">
+      <div class="panel-title">&#128202; DAILY SUMMARY</div>
+      <div class="chart-wrap"><canvas id="dailyChart"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">&#128202; MONTHLY SUMMARY</div>
+      <div class="chart-wrap"><canvas id="monthlyChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://apnmorgwlhdvliftidyw.supabase.co/rest/v1/rpc/get_sale_dashboard";
+const SUPABASE_KEY = "sb_publishable_Ix6Z93i1ADscYV1vx4deJQ_-YmYsvoy";
+const SUPABASE_REST_BASE = "https://apnmorgwlhdvliftidyw.supabase.co/rest/v1";
+
+const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+
+let dailyChart, monthlyChart;
+let lastPayload = null;
+
+const $ = (id) => document.getElementById(id);
+
+function fmtNum(n){
+  if(n === null || n === undefined) return "0";
+  return Math.round(n).toLocaleString("en-IN");
+}
+function fmtRevenueShort(n){
+  if(n === null || n === undefined) return "0";
+  if(Math.abs(n) >= 1000) return (n/1000).toFixed(2) + "K";
+  return n.toFixed(2);
+}
+function fmtRevenueFull(n){
+  if(n === null || n === undefined) return "0";
+  return n.toLocaleString("en-IN", {maximumFractionDigits:2});
+}
+
+function todayISO(){
+  const d = new Date();
+  const off = d.getTimezoneOffset();
+  const local = new Date(d.getTime() - off*60000);
+  return local.toISOString().slice(0,10);
+}
+
+function setStatus(msg, isError){
+  const el = $("statusLine");
+  el.textContent = msg;
+  el.className = "status-line" + (isError ? " error" : "");
+}
+
+async function fetchDashboard(reportDate){
+  const res = await fetch(SUPABASE_URL, {
+    method: "POST",
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ report_date: reportDate })
+  });
+  if(!res.ok){
+    const text = await res.text();
+    throw new Error("HTTP " + res.status + ": " + text);
+  }
+  const data = await res.json();
+  return Array.isArray(data) ? data[0] : data;
+}
+
+function renderKpis(kpi, reportDate){
+  $("todaySales").innerHTML = fmtNum(kpi.TODAY_SALES) + " <small>Orders</small>";
+  $("todayRevenue").textContent = fmtRevenueShort(kpi.TODAY_REVENUE);
+
+  const monthIdx = new Date(reportDate + "T00:00:00").getMonth();
+  $("mtdLabel").textContent = monthNames[monthIdx] + " MTD";
+  $("mtdSales").textContent = fmtNum(kpi.mtd_sales);
+  $("mtdRevenue").textContent = fmtRevenueShort(kpi.MTD_REVENUE);
+
+  $("pmsdSales").textContent = fmtNum(kpi.PMSD_SALES);
+  $("pmsdRevenue").textContent = fmtRevenueShort(kpi.PMSD_REVENUE);
+
+  $("pmSales").textContent = fmtNum(kpi.PM_SALES);
+  $("pmRevenue").textContent = fmtRevenueShort(kpi.PM_REVENUE);
+}
+
+function renderLeaderboard(rows){
+  const body = $("leaderboardBody");
+  if(!rows || !rows.length){
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#9399a8;padding:24px;">No data for this period</td></tr>';
+    return;
+  }
+  const GOAL = 200;
+  body.innerHTML = rows.map((r, i) => {
+    const mtdSales = r.mtd_sales || 0;
+    const mtdRev = r.mtd_revenue || 0;
+    const todaySales = r.today_sales || 0;
+    const todayRev = r.today_revenue || 0;
+    const arpu = mtdSales ? (mtdRev / mtdSales) : 0;
+    const pct = GOAL ? Math.round((mtdSales / GOAL) * 100) : 0;
+    const fillPct = Math.min(pct, 100);
+    return `
+      <tr>
+        <td>${i+1}</td>
+        <td class="rep-name">${(r.sales_representative||"").trim()}</td>
+        <td>
+          <span class="day-val">${todaySales || "0"}</span>
+          <span class="day-rev">₹${fmtRevenueShort(todayRev)}</span>
+        </td>
+        <td class="mtd-val">${mtdSales}</td>
+        <td>₹${fmtRevenueShort(mtdRev)}</td>
+        <td>₹${fmtRevenueShort(arpu)}</td>
+        <td>
+          <div class="target-wrap">
+            <span class="target-pct">${pct}%</span>
+            <div class="target-track"><div class="target-fill" style="width:${fillPct}%"></div></div>
+            <span class="target-goal">${GOAL}</span>
+          </div>
+        </td>
+      </tr>`;
+  }).join("");
+}
+
+function renderDailyChart(rows){
+  const ctx = $("dailyChart").getContext("2d");
+  const labels = (rows||[]).map(r => new Date(r.order_date).getDate());
+  const values = (rows||[]).map(r => r.no_of_sales);
+  if(dailyChart) dailyChart.destroy();
+  dailyChart = new Chart(ctx, {
+    type:"line",
+    data:{ labels, datasets:[{
+      data: values,
+      borderColor:"#ff6a2b",
+      backgroundColor:"rgba(255,106,43,0.08)",
+      borderWidth:2,
+      pointRadius:3,
+      pointBackgroundColor:"#ff6a2b",
+      tension:0.35,
+      fill:true
+    }]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{display:false}, ticks:{font:{size:10}}},
+        y:{grid:{color:"#f1f2f5"}, ticks:{font:{size:10}}}
+      }
+    }
+  });
+}
+
+function renderMonthlyChart(rows){
+  const ctx = $("monthlyChart").getContext("2d");
+  const labels = (rows||[]).map(r => monthNames[r.month-1]);
+  const values = (rows||[]).map(r => r.no_of_sales);
+  if(monthlyChart) monthlyChart.destroy();
+  monthlyChart = new Chart(ctx, {
+    type:"line",
+    data:{ labels, datasets:[{
+      data: values,
+      borderColor:"#ff6a2b",
+      backgroundColor:"rgba(255,106,43,0.12)",
+      borderWidth:2,
+      pointRadius:4,
+      pointBackgroundColor:"#ff6a2b",
+      tension:0.3,
+      fill:true
+    }]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{display:false}, ticks:{font:{size:10}}},
+        y:{grid:{color:"#f1f2f5"}, ticks:{font:{size:10}}}
+      }
+    }
+  });
+}
+
+async function loadDashboard(reportDate){
+  $("appBody").classList.add("loading-overlay");
+  setStatus("Fetching data for " + reportDate + "…");
+  try{
+    const payload = await fetchDashboard(reportDate);
+    lastPayload = payload;
+    renderKpis(payload.kpi_cards || {}, reportDate);
+    renderLeaderboard(payload.leaderboard_metrics || []);
+    renderDailyChart(payload.daily_metrics || []);
+    renderMonthlyChart(payload.monthly_metrics || []);
+    setStatus("Updated for " + reportDate, false);
+  }catch(err){
+    console.error(err);
+    setStatus("Couldn't load data: " + err.message, true);
+  }finally{
+    $("appBody").classList.remove("loading-overlay");
+  }
+
+  // Destinations come from a separate join, not the RPC — fetch independently
+  // so a failure here doesn't block the rest of the dashboard.
+  try{
+    const topDestinations = await fetchTopDestinations(reportDate);
+    renderDestinations(topDestinations);
+  }catch(err){
+    console.error("Destinations error:", err);
+    $("destinationsList").innerHTML = '<div class="placeholder-note">Couldn\'t load destinations.</div>';
+  }
+}
+
+async function restGet(path){
+  const res = await fetch(`${SUPABASE_REST_BASE}/${path}`, {
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY
+    }
+  });
+  if(!res.ok){
+    const text = await res.text();
+    throw new Error("HTTP " + res.status + ": " + text);
+  }
+  return res.json();
+}
+
+// Top destinations aren't returned by get_sale_dashboard(), so we derive them
+// client-side: orders -> product_id -> products.coverageDestinations -> destinations.
+async function fetchTopDestinations(reportDate){
+  const [orders, products, destinations] = await Promise.all([
+    restGet(`orders?order_date_time=eq.${reportDate}&select=*`),
+    restGet(`products?select=*`),
+    restGet(`destinations?select=*`)
+  ]);
+
+  const productById = {};
+  products.forEach(p => { productById[p.prod_id] = p; });
+
+  const destById = {};
+  destinations.forEach(d => { destById[d.destination_id] = d; });
+
+  const counts = {};
+  orders.forEach(o => {
+    const product = productById[o.product_id];
+    if(!product) return;
+    const cov = product.coverageDestinations || "";
+    cov.split(",").map(c => c.trim()).filter(Boolean).forEach(code => {
+      const dest = destById[code];
+      // destination_type 1 = actual country (skip regional/bundle codes)
+      if(dest && dest.destination_type === 1){
+        counts[dest.destination_name] = (counts[dest.destination_name] || 0) + 1;
+      }
+    });
+  });
+
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([name, count]) => ({ name, count }));
+}
+
+function renderDestinations(list){
+  const container = $("destinationsList");
+  if(!list || !list.length){
+    container.innerHTML = '<div class="placeholder-note">No destination data for this date.</div>';
+    return;
+  }
+  container.innerHTML = list.map(d => `
+    <div class="dest-item">
+      <span class="dest-name">${d.name}</span>
+      <span class="dest-count">${d.count}</span>
+    </div>
+  `).join("");
+}
+
+function downloadCsv(){
+  if(!lastPayload || !lastPayload.leaderboard_metrics) return;
+  const rows = lastPayload.leaderboard_metrics;
+  const header = ["sales_representative","today_sales","today_revenue","mtd_sales","mtd_revenue"];
+  const lines = [header.join(",")];
+  rows.forEach(r => {
+    lines.push([
+      (r.sales_representative||"").trim(),
+      r.today_sales || 0,
+      r.today_revenue || 0,
+      r.mtd_sales || 0,
+      r.mtd_revenue || 0
+    ].join(","));
+  });
+  const blob = new Blob([lines.join("\n")], {type:"text/csv"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "voyx_leaderboard_" + ($("reportDate").value || "export") + ".csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+$("reportDate").addEventListener("change", (e) => {
+  if(e.target.value) loadDashboard(e.target.value);
+});
+$("downloadCsv").addEventListener("click", downloadCsv);
+
+const initDate = todayISO();
+$("reportDate").value = initDate;
+loadDashboard(initDate);
+</script>
+
+</body>
+</html>
